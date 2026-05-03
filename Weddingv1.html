@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maria & Zuhayr — November 8, 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --teal:#1c6e5c;--teal-light:#2a8f76;
+  --fern:#7ebd6f;--fern-light:#a2d396;
+  --sky:#a4cef2;--sky-pale:#d0e6f9;--sky-deep:#6baae0;
+  --blush:#c19c8f;--blush-light:#d9beb4;
+  --kiki-red:#c42d2d;--kiki-red-deep:#a02020;
+  --navy:#2a3555;--navy-light:#3d4e72;
+  --sage:#c5cdb5;--sage-light:#dde3d2;
+  --lavender:#b5b0c8;
+  --cream:#faf8f4;--warm-white:#fff;
+  --brown:#6b5a4e;--gold:#b8a033;
+  --shadow:rgba(42,53,85,.08);
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;background:var(--cream);
+  color:var(--navy);overflow-x:hidden;min-height:100vh;
+}
+
+/* ═══ SKY SCENE ═══ */
+.sky-scene{
+  position:relative;width:100%;min-height:520px;overflow:hidden;
+  background:linear-gradient(180deg,#7bb8e0 0%,var(--sky) 30%,var(--sky-pale) 60%,#f0e8d8 85%,var(--cream) 100%);
+}
+.s-cloud{position:absolute;opacity:.7;animation:cloud-drift linear infinite}
+@keyframes cloud-drift{0%{transform:translateX(-100%)}100%{transform:translateX(calc(100vw + 100%))}}
+
+.flyer{position:absolute;top:28%;left:50%;transform:translateX(-50%);animation:fly-bob 4s ease-in-out infinite;z-index:3}
+@keyframes fly-bob{0%,100%{transform:translateX(-50%) translateY(0) rotate(-2deg)}50%{transform:translateX(-50%) translateY(-18px) rotate(1deg)}}
+.cat-companion{position:absolute;top:32%;left:calc(50% + 55px);animation:fly-bob 4s ease-in-out infinite;animation-delay:-.3s;z-index:3}
+
+.bird{position:absolute;z-index:2;animation:bird-fly 12s linear infinite}
+@keyframes bird-fly{0%{transform:translate(0,0)}25%{transform:translate(80px,-20px)}50%{transform:translate(160px,5px)}100%{transform:translate(600px,-40px)}}
+
+.town{position:absolute;bottom:0;left:0;width:100%;z-index:2}
+
+.floating-envelope{position:fixed;pointer-events:none;z-index:0;animation:env-float 16s ease-in-out infinite alternate;opacity:.12}
+@keyframes env-float{0%{transform:translate(0,0) rotate(-5deg)}33%{transform:translate(20px,-30px) rotate(3deg)}66%{transform:translate(-15px,-10px) rotate(-2deg)}100%{transform:translate(10px,-25px) rotate(4deg)}}
+
+/* ═══ LAYOUT ═══ */
+.page-wrapper{position:relative;z-index:4;max-width:620px;margin:0 auto;padding:0 20px 60px;margin-top:-60px}
+
+.hero-text{position:absolute;z-index:5;bottom:90px;left:0;right:0;text-align:center;animation:fadeUp 1s ease-out .3s both}
+.hero-tag{font-family:'DM Sans',sans-serif;font-weight:300;font-size:.72rem;letter-spacing:5px;text-transform:uppercase;color:var(--teal);margin-bottom:6px;background:rgba(250,248,244,.6);display:inline-block;padding:4px 14px;border-radius:20px}
+.hero-names{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(2.4rem,7vw,3.8rem);line-height:1.1;color:var(--navy)}
+.hero-names .amp{font-style:italic;font-weight:300;color:var(--kiki-red);font-size:.5em;vertical-align:middle;margin:0 .3em}
+.hero-date-line{margin-top:8px;font-family:'Cormorant Garamond',serif;font-size:.95rem;letter-spacing:2px;color:var(--brown);background:rgba(250,248,244,.55);display:inline-block;padding:3px 12px;border-radius:16px}
+@keyframes fadeUp{0%{opacity:0;transform:translateY(24px)}100%{opacity:1;transform:translateY(0)}}
+
+/* ═══ CARDS ═══ */
+.card{background:var(--warm-white);border-radius:20px;padding:32px 28px;margin-bottom:22px;box-shadow:0 2px 24px var(--shadow),0 0 0 1px rgba(28,110,92,.04);animation:fadeUp .8s ease-out both}
+.card:nth-child(1){animation-delay:.1s}.card:nth-child(2){animation-delay:.2s}.card:nth-child(3){animation-delay:.3s}.card:nth-child(4){animation-delay:.4s}
+.card-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.card-header .card-icon{width:36px;height:36px;flex-shrink:0}
+.card-header h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:1.4rem;color:var(--navy)}
+.card p{line-height:1.75;font-weight:300;font-size:.92rem;margin-bottom:6px;color:var(--navy-light)}
+
+.details-list{margin-top:12px}
+.detail-row{display:flex;gap:14px;padding:10px 0;border-bottom:1px solid var(--sage-light);font-size:.92rem}
+.detail-row:last-child{border-bottom:none}
+.detail-row .d-label{font-weight:500;color:var(--teal);min-width:70px;font-size:.8rem;letter-spacing:.5px;text-transform:uppercase;padding-top:1px}
+.detail-row .d-value{font-weight:300;color:var(--navy)}
+
+.bakery-deco{display:flex;justify-content:center;gap:16px;margin:18px 0 8px;opacity:.5}
+
+/* ═══ RSVP FORM ═══ */
+.rsvp-card{border-top:3px solid var(--kiki-red);position:relative;overflow:hidden}
+.rsvp-card::before{content:'';position:absolute;top:-1px;right:-1px;width:80px;height:80px;background:linear-gradient(135deg,transparent 50%,var(--sage-light) 50%);border-radius:0 20px 0 0;opacity:.4}
+
+.form-row{margin-bottom:16px}
+.form-row label{display:block;font-weight:500;font-size:.8rem;margin-bottom:5px;letter-spacing:.4px;color:var(--teal);text-transform:uppercase}
+.form-row input,.form-row textarea,.form-row select{width:100%;padding:12px 14px;border:1.5px solid var(--sage);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:.92rem;background:var(--cream);color:var(--navy);transition:border .2s,box-shadow .2s}
+.form-row input:focus,.form-row textarea:focus,.form-row select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(28,110,92,.1)}
+.form-row textarea{resize:vertical;min-height:80px}
+
+.radio-group{display:flex;gap:10px;flex-wrap:wrap}
+.radio-group label{display:flex;align-items:center;gap:6px;cursor:pointer;font-weight:400;font-size:.92rem;text-transform:none;letter-spacing:0;padding:10px 20px;border:1.5px solid var(--sage);border-radius:12px;transition:all .2s;color:var(--navy)}
+.radio-group label:has(input:checked){border-color:var(--kiki-red);background:rgba(196,45,45,.06);color:var(--kiki-red-deep)}
+.radio-group input{display:none}
+
+/* Guest name fields */
+.guest-fields{
+  margin-top:8px;padding:16px;
+  background:var(--sage-light);border-radius:14px;
+  animation:fadeUp .4s ease-out;
+}
+.guest-fields-title{
+  font-size:.78rem;font-weight:500;color:var(--teal);
+  text-transform:uppercase;letter-spacing:.4px;margin-bottom:12px;
+}
+.guest-entry{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;
+  margin-bottom:10px;position:relative;
+}
+.guest-entry:last-child{margin-bottom:0}
+.guest-entry-label{
+  grid-column:1/-1;font-size:.75rem;font-weight:500;
+  color:var(--brown);margin-bottom:-2px;
+}
+.guest-entry input{
+  padding:10px 12px;border:1.5px solid var(--sage);border-radius:10px;
+  font-family:'DM Sans',sans-serif;font-size:.88rem;
+  background:var(--warm-white);color:var(--navy);
+  transition:border .2s,box-shadow .2s;
+}
+.guest-entry input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(28,110,92,.1)}
+
+.btn-submit{
+  display:inline-flex;align-items:center;gap:8px;padding:14px 38px;
+  background:var(--teal);color:var(--cream);border:none;border-radius:14px;
+  font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:500;
+  cursor:pointer;transition:all .3s;letter-spacing:.3px;box-shadow:0 4px 16px rgba(28,110,92,.2);
+}
+.btn-submit:hover{background:var(--teal-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(28,110,92,.25)}
+.btn-submit:active{transform:translateY(0)}
+.btn-submit:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* ═══ LETTER FOLD & FLY ANIMATION ═══ */
+.fly-overlay{
+  display:none;position:fixed;inset:0;z-index:9999;
+  background:transparent;pointer-events:none;
+}
+.fly-overlay.active{display:block}
+
+.letter-wrapper{
+  position:fixed;top:50%;left:50%;z-index:10000;
+  transform:translate(-50%,-50%);
+  width:320px;pointer-events:none;
+  perspective:800px;
+}
+.letter-paper{
+  width:100%;height:220px;
+  background:var(--cream);
+  border:1.5px solid var(--sage);
+  border-radius:8px;
+  box-shadow:0 4px 30px rgba(42,53,85,.15);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;
+  color:var(--navy);font-size:1rem;
+  text-align:center;padding:20px;
+  line-height:1.5;
+  transform-origin:center center;
+}
+.envelope-back{
+  width:100%;height:160px;
+  background:var(--blush-light);
+  border:1.5px solid var(--blush);
+  border-radius:8px;
+  position:absolute;bottom:0;left:0;
+  box-shadow:0 4px 20px rgba(42,53,85,.1);
+  opacity:0;
+}
+.envelope-flap{
+  width:100%;height:80px;
+  position:absolute;top:0;left:0;
+  transform-origin:top center;
+  opacity:0;
+}
+.envelope-flap polygon{fill:var(--blush-light);stroke:var(--blush);stroke-width:1.5}
+.envelope-seal{
+  position:absolute;top:60px;left:50%;transform:translateX(-50%);
+  width:28px;height:28px;background:var(--kiki-red);border-radius:50%;
+  opacity:0;z-index:2;
+  display:flex;align-items:center;justify-content:center;
+}
+.envelope-seal::after{
+  content:'M&Z';font-family:'Cormorant Garamond',serif;
+  font-size:.5rem;color:var(--cream);font-weight:600;letter-spacing:.5px;
+}
+
+/* Keyframes for the sequence */
+@keyframes paper-shrink{
+  0%{transform:scale(1);opacity:1}
+  100%{transform:scale(.85) translateY(10px);opacity:1}
+}
+@keyframes paper-fold-top{
+  0%{transform:rotateX(0deg)}
+  100%{transform:rotateX(180deg)}
+}
+@keyframes envelope-appear{
+  0%{opacity:0;transform:translateY(20px)}
+  100%{opacity:1;transform:translateY(0)}
+}
+@keyframes seal-stamp{
+  0%{opacity:0;transform:translateX(-50%) scale(2)}
+  60%{opacity:1;transform:translateX(-50%) scale(.9)}
+  100%{opacity:1;transform:translateX(-50%) scale(1)}
+}
+@keyframes fly-away{
+  0%{transform:translate(-50%,-50%) rotate(0deg) scale(1);opacity:1}
+  30%{transform:translate(-50%,-70%) rotate(-8deg) scale(.9);opacity:1}
+  60%{transform:translate(20%,-120%) rotate(-15deg) scale(.6);opacity:.8}
+  100%{transform:translate(80%,-250%) rotate(-20deg) scale(.3);opacity:0}
+}
+
+.letter-wrapper.phase-shrink .letter-paper{
+  animation:paper-shrink .6s ease-in-out forwards;
+}
+.letter-wrapper.phase-envelope .envelope-back{
+  animation:envelope-appear .4s ease-out forwards;
+}
+.letter-wrapper.phase-envelope .envelope-flap{
+  opacity:1;
+}
+.letter-wrapper.phase-seal .envelope-seal{
+  animation:seal-stamp .3s ease-out forwards;
+}
+.letter-wrapper.phase-fly{
+  animation:fly-away 1.4s ease-in forwards;
+}
+
+/* Success screen */
+.success-screen{
+  display:none;position:fixed;inset:0;z-index:9998;
+  background:linear-gradient(180deg,var(--sky-pale),var(--cream));
+  flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:40px;
+  animation:fadeUp .6s ease-out;
+}
+.success-screen.show{display:flex}
+.success-screen h3{
+  font-family:'Cormorant Garamond',serif;font-size:2rem;
+  color:var(--teal);margin-bottom:10px;
+}
+.success-screen p{
+  font-weight:300;font-size:1rem;line-height:1.7;color:var(--navy-light);
+  max-width:400px;
+}
+.success-screen .success-cat{margin-bottom:20px;opacity:.6}
+.success-screen .back-btn{
+  margin-top:24px;padding:10px 28px;background:none;
+  border:1.5px solid var(--teal);border-radius:12px;
+  font-family:'DM Sans',sans-serif;font-size:.88rem;
+  color:var(--teal);cursor:pointer;transition:all .2s;
+}
+.success-screen .back-btn:hover{background:var(--teal);color:var(--cream)}
+
+.cat-divider{text-align:center;margin:8px 0 16px;opacity:.45}
+.footer{text-align:center;padding:30px 0 20px;font-weight:300;font-size:.76rem;color:var(--blush);letter-spacing:1.5px}
+
+@media(max-width:500px){
+  .sky-scene{min-height:420px}
+  .page-wrapper{padding:0 14px 40px;margin-top:-40px}
+  .card{padding:24px 18px}
+  .hero-text{bottom:65px}
+  .flyer svg{width:120px}
+  .cat-companion svg{width:22px}
+  .letter-wrapper{width:260px}
+  .letter-paper{height:180px;font-size:.88rem}
+  .guest-entry{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ SKY SCENE ═══ -->
+<div class="sky-scene">
+  <svg class="s-cloud" style="top:8%;animation-duration:45s" width="200" height="55" viewBox="0 0 200 55"><ellipse cx="100" cy="35" rx="90" ry="20" fill="white" opacity=".8"/><ellipse cx="65" cy="25" rx="45" ry="20" fill="white" opacity=".9"/><ellipse cx="140" cy="22" rx="50" ry="22" fill="white" opacity=".85"/></svg>
+  <svg class="s-cloud" style="top:18%;animation-duration:60s;animation-delay:-22s;opacity:.5" width="160" height="45" viewBox="0 0 160 45"><ellipse cx="80" cy="28" rx="70" ry="17" fill="white" opacity=".8"/><ellipse cx="50" cy="20" rx="38" ry="16" fill="white" opacity=".9"/><ellipse cx="115" cy="18" rx="40" ry="18" fill="white"/></svg>
+  <svg class="s-cloud" style="top:5%;animation-duration:70s;animation-delay:-40s;opacity:.4" width="140" height="40" viewBox="0 0 140 40"><ellipse cx="70" cy="25" rx="60" ry="15" fill="white"/><ellipse cx="45" cy="18" rx="32" ry="14" fill="white"/><ellipse cx="100" cy="16" rx="35" ry="16" fill="white"/></svg>
+
+  <svg class="bird" style="top:15%;left:10%;animation-delay:-2s;animation-duration:14s" width="20" height="10" viewBox="0 0 20 10"><path d="M0,5 Q5,0 10,5 Q15,0 20,5" stroke="var(--navy)" stroke-width="1.2" fill="none" opacity=".3"/></svg>
+  <svg class="bird" style="top:20%;left:5%;animation-delay:-5s;animation-duration:16s" width="16" height="8" viewBox="0 0 16 8"><path d="M0,4 Q4,0 8,4 Q12,0 16,4" stroke="var(--navy)" stroke-width="1" fill="none" opacity=".25"/></svg>
+  <svg class="bird" style="top:12%;left:15%;animation-delay:-8s;animation-duration:18s" width="14" height="7" viewBox="0 0 14 7"><path d="M0,3.5 Q3.5,0 7,3.5 Q10.5,0 14,3.5" stroke="var(--navy)" stroke-width="1" fill="none" opacity=".2"/></svg>
+
+  <!-- Flying figure -->
+  <svg class="flyer" width="160" height="100" viewBox="0 0 160 100">
+    <line x1="20" y1="55" x2="140" y2="48" stroke="var(--brown)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M135,48 Q150,38 155,42 Q158,46 155,52 Q150,58 140,54 Q148,50 145,46Z" fill="var(--gold)" opacity=".8"/>
+    <path d="M138,47 Q152,40 156,45" stroke="var(--brown)" stroke-width="1" fill="none" opacity=".5"/>
+    <path d="M55,36 Q50,50 42,65 Q55,68 70,65 Q65,50 60,36Z" fill="var(--navy)"/>
+    <line x1="50" y1="62" x2="46" y2="75" stroke="var(--blush)" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="58" y1="63" x2="62" y2="74" stroke="var(--blush)" stroke-width="2.5" stroke-linecap="round"/>
+    <ellipse cx="44" cy="76" rx="4" ry="2.5" fill="var(--kiki-red)"/>
+    <ellipse cx="63" cy="75" rx="4" ry="2.5" fill="var(--kiki-red)"/>
+    <circle cx="57" cy="30" r="11" fill="var(--blush-light)"/>
+    <path d="M46,28 Q47,18 57,17 Q67,18 68,28 Q67,24 57,23 Q47,24 46,28Z" fill="var(--brown)"/>
+    <path d="M48,30 Q46,26 47,22" stroke="var(--brown)" stroke-width="2" fill="none"/>
+    <path d="M52,20 Q45,12 48,18 Q44,14 50,20Z" fill="var(--kiki-red)"/>
+    <path d="M52,20 Q58,12 56,18 Q60,14 54,20Z" fill="var(--kiki-red)"/>
+    <circle cx="52" cy="20" r="2" fill="var(--kiki-red-deep)"/>
+    <line x1="52" y1="42" x2="45" y2="54" stroke="var(--blush)" stroke-width="2.5" stroke-linecap="round"/>
+    <ellipse cx="68" cy="56" rx="8" ry="6" fill="var(--blush)"/>
+    <path d="M62,52 Q68,48 74,52" stroke="var(--brown)" stroke-width="1.5" fill="none"/>
+  </svg>
+
+  <!-- Black cat -->
+  <svg class="cat-companion" width="28" height="28" viewBox="0 0 28 28">
+    <ellipse cx="14" cy="20" rx="7" ry="8" fill="#1a1a1a"/><circle cx="14" cy="10" r="6" fill="#1a1a1a"/>
+    <polygon points="8,7 10,1 12,6" fill="#1a1a1a"/><polygon points="16,6 18,1 20,7" fill="#1a1a1a"/>
+    <ellipse cx="11.5" cy="10" rx="1.5" ry="1.8" fill="#f0e060"/><ellipse cx="16.5" cy="10" rx="1.5" ry="1.8" fill="#f0e060"/>
+    <ellipse cx="11.5" cy="10.3" rx=".7" ry="1.2" fill="#1a1a1a"/><ellipse cx="16.5" cy="10.3" rx=".7" ry="1.2" fill="#1a1a1a"/>
+    <path d="M20,22 Q26,18 24,12" stroke="#1a1a1a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </svg>
+
+  <!-- Town skyline -->
+  <svg class="town" viewBox="0 0 1200 180" preserveAspectRatio="none" width="100%" height="180">
+    <path d="M0,120 Q150,60 300,90 Q500,50 700,80 Q900,55 1050,75 Q1150,65 1200,80 L1200,180 L0,180Z" fill="var(--fern)" opacity=".3"/>
+    <path d="M0,140 Q100,100 250,115 Q400,90 550,110 Q700,85 850,105 Q1000,90 1100,100 L1200,95 L1200,180 L0,180Z" fill="var(--fern)" opacity=".5"/>
+    <rect x="80" y="95" width="35" height="85" rx="1" fill="var(--blush-light)"/><rect x="80" y="90" width="35" height="8" fill="var(--kiki-red)" opacity=".5"/>
+    <rect x="170" y="85" width="28" height="95" rx="1" fill="var(--sage)"/>
+    <rect x="250" y="100" width="40" height="80" rx="1" fill="#e8ddd0"/>
+    <rect x="350" y="88" width="32" height="92" rx="1" fill="var(--lavender)" opacity=".7"/>
+    <rect x="450" y="95" width="45" height="85" rx="1" fill="var(--blush-light)"/>
+    <rect x="550" y="55" width="30" height="125" rx="1" fill="var(--sage)"/>
+    <polygon points="550,55 565,30 580,55" fill="var(--teal)" opacity=".7"/>
+    <circle cx="565" cy="72" r="8" fill="var(--cream)" stroke="var(--navy)" stroke-width="1" opacity=".6"/>
+    <rect x="640" y="100" width="38" height="80" rx="1" fill="#ddd5c5"/>
+    <rect x="730" y="90" width="30" height="90" rx="1" fill="var(--blush-light)"/>
+    <rect x="820" y="98" width="42" height="82" rx="1" fill="var(--sage)"/>
+    <rect x="920" y="88" width="35" height="92" rx="1" fill="var(--lavender)" opacity=".6"/>
+    <rect x="1010" y="95" width="28" height="85" rx="1" fill="#e8ddd0"/>
+    <rect x="1100" y="102" width="40" height="78" rx="1" fill="var(--blush-light)"/>
+    <g fill="var(--sky-pale)" opacity=".6">
+      <rect x="88" y="102" width="6" height="7" rx="1"/><rect x="100" y="102" width="6" height="7" rx="1"/>
+      <rect x="88" y="115" width="6" height="7" rx="1"/><rect x="100" y="115" width="6" height="7" rx="1"/>
+      <rect x="176" y="92" width="5" height="6" rx="1"/><rect x="186" y="92" width="5" height="6" rx="1"/>
+      <rect x="176" y="104" width="5" height="6" rx="1"/>
+      <rect x="258" y="108" width="6" height="7" rx="1"/><rect x="270" y="108" width="6" height="7" rx="1"/>
+      <rect x="460" y="102" width="6" height="7" rx="1"/><rect x="474" y="102" width="6" height="7" rx="1"/>
+      <rect x="460" y="115" width="6" height="7" rx="1"/>
+      <rect x="648" y="108" width="6" height="7" rx="1"/><rect x="660" y="108" width="6" height="7" rx="1"/>
+      <rect x="738" y="98" width="5" height="6" rx="1"/><rect x="748" y="98" width="5" height="6" rx="1"/>
+      <rect x="828" y="106" width="6" height="7" rx="1"/><rect x="842" y="106" width="6" height="7" rx="1"/>
+      <rect x="928" y="96" width="5" height="6" rx="1"/><rect x="938" y="96" width="5" height="6" rx="1"/>
+    </g>
+    <polygon points="250,100 270,82 290,100" fill="var(--kiki-red)" opacity=".35"/>
+    <polygon points="640,100 659,84 678,100" fill="var(--kiki-red)" opacity=".3"/>
+    <polygon points="820,98 841,80 862,98" fill="var(--teal)" opacity=".25"/>
+    <polygon points="1100,102 1120,88 1140,102" fill="var(--kiki-red)" opacity=".3"/>
+    <path d="M0,155 Q200,148 400,152 Q600,145 800,150 Q1000,146 1200,150 L1200,180 L0,180Z" fill="var(--sky)" opacity=".35"/>
+    <path d="M0,162 Q300,155 600,160 Q900,154 1200,158 L1200,180 L0,180Z" fill="var(--sky)" opacity=".2"/>
+    <circle cx="130" cy="130" r="15" fill="var(--fern)" opacity=".6"/><circle cx="145" cy="125" r="12" fill="var(--fern-light)" opacity=".5"/>
+    <circle cx="400" cy="128" r="14" fill="var(--fern)" opacity=".5"/><circle cx="415" cy="124" r="11" fill="var(--fern-light)" opacity=".4"/>
+    <circle cx="700" cy="130" r="13" fill="var(--fern)" opacity=".55"/>
+    <circle cx="960" cy="128" r="16" fill="var(--fern)" opacity=".5"/><circle cx="978" cy="123" r="12" fill="var(--fern-light)" opacity=".4"/>
+  </svg>
+
+  <div class="hero-text">
+    <p class="hero-tag">Special Delivery — You're Invited</p>
+    <h1 class="hero-names">Maria <span class="amp">&</span> Zuhayr</h1>
+    <p class="hero-date-line">November 8, 2026 · Four in the Afternoon</p>
+  </div>
+</div>
+
+<!-- Floating envelopes -->
+<script>
+for(let i=0;i<4;i++){
+  const e=document.createElement('div');e.className='floating-envelope';
+  e.style.left=(8+Math.random()*80)+'vw';e.style.top=(25+Math.random()*55)+'vh';
+  e.style.animationDelay=(-Math.random()*16)+'s';e.style.animationDuration=(14+Math.random()*8)+'s';
+  const s=20+Math.random()*16;
+  e.innerHTML=`<svg width="${s}" height="${s*.65}" viewBox="0 0 40 26"><rect x="1" y="1" width="38" height="24" rx="3" fill="var(--cream)" stroke="var(--blush)" stroke-width="1.5"/><path d="M1,1 L20,15 L39,1" stroke="var(--kiki-red)" stroke-width="1" fill="none" opacity=".5"/><circle cx="33" cy="6" r="3" fill="var(--kiki-red)" opacity=".3"/></svg>`;
+  document.body.appendChild(e);
+}
+</script>
+
+<!-- ═══ MAIN CONTENT ═══ -->
+<div class="page-wrapper" id="main-content">
+
+  <!-- Details -->
+  <div class="card">
+    <div class="card-header">
+      <svg class="card-icon" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="16" stroke="var(--teal)" stroke-width="1.5" opacity=".4"/><path d="M18,10 L18,19 L24,22" stroke="var(--teal)" stroke-width="2" stroke-linecap="round"/></svg>
+      <h2>The Details</h2>
+    </div>
+    <div class="details-list">
+      <div class="detail-row"><span class="d-label">Date</span><span class="d-value">Sunday, November 8, 2026</span></div>
+      <div class="detail-row"><span class="d-label">Time</span><span class="d-value">4:00 in the Afternoon</span></div>
+      <div class="detail-row"><span class="d-label">Venue</span><span class="d-value">1380 S. Price Road, Chandler, AZ 85286</span></div>
+      <div class="detail-row"><span class="d-label">After</span><span class="d-value">Reception to follow</span></div>
+    </div>
+    <div class="bakery-deco">
+      <svg width="28" height="28" viewBox="0 0 28 28"><ellipse cx="14" cy="18" rx="10" ry="8" fill="var(--blush)"/><ellipse cx="14" cy="12" rx="8" ry="6" fill="var(--blush-light)"/><path d="M10,10 Q14,4 18,10" stroke="var(--gold)" stroke-width="1" fill="none"/></svg>
+      <svg width="28" height="28" viewBox="0 0 28 28"><rect x="8" y="10" width="12" height="14" rx="2" fill="var(--blush)"/><rect x="6" y="8" width="16" height="4" rx="2" fill="var(--blush-light)"/><path d="M14,8 L14,4" stroke="var(--fern)" stroke-width="1.5" stroke-linecap="round"/><circle cx="14" cy="3" r="1.5" fill="var(--fern)"/></svg>
+      <svg width="28" height="28" viewBox="0 0 28 28"><path d="M6,22 Q6,10 14,8 Q22,10 22,22Z" fill="var(--blush-light)"/><path d="M10,18 Q14,14 18,18" stroke="var(--gold)" stroke-width=".8" fill="none" opacity=".5"/></svg>
+    </div>
+  </div>
+
+  <!-- Story -->
+  <div class="card">
+    <div class="card-header">
+      <svg class="card-icon" viewBox="0 0 36 36" fill="none"><rect x="4" y="8" width="28" height="20" rx="3" stroke="var(--kiki-red)" stroke-width="1.5" opacity=".5"/><path d="M4,8 L18,20 L32,8" stroke="var(--kiki-red)" stroke-width="1.5" opacity=".5"/></svg>
+      <h2>A Special Delivery</h2>
+    </div>
+    <p>Some deliveries change everything. Ours brought two hearts together across the skies — and now we're ready to begin the greatest adventure of all.</p>
+    <p>Consider this your very own special delivery: an invitation to celebrate with us as we start our new life together.</p>
+    <div class="cat-divider">
+      <svg width="50" height="30" viewBox="0 0 50 30"><ellipse cx="25" cy="22" rx="10" ry="8" fill="var(--navy)"/><circle cx="25" cy="12" r="7" fill="var(--navy)"/><polygon points="18,9 21,2 23,8" fill="var(--navy)"/><polygon points="27,8 29,2 32,9" fill="var(--navy)"/><ellipse cx="22" cy="12" rx="1.5" ry="2" fill="#f0e060"/><ellipse cx="28" cy="12" rx="1.5" ry="2" fill="#f0e060"/><path d="M34,24 Q40,18 38,12" stroke="var(--navy)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+    </div>
+  </div>
+
+  <!-- RSVP -->
+  <div class="card rsvp-card" id="rsvp">
+    <div class="card-header">
+      <svg class="card-icon" viewBox="0 0 36 36" fill="none"><path d="M6,28 L6,8 Q6,5 9,5 L27,5 Q30,5 30,8 L30,28" stroke="var(--teal)" stroke-width="1.5" opacity=".5"/><path d="M6,28 L18,20 L30,28" stroke="var(--teal)" stroke-width="1.5" fill="var(--sage-light)" opacity=".3"/><path d="M14,14 L22,14 M14,18 L20,18" stroke="var(--teal)" stroke-width="1" opacity=".4" stroke-linecap="round"/></svg>
+      <h2>RSVP</h2>
+    </div>
+    <p style="margin-bottom:18px;font-size:.85rem;color:var(--brown)">Kindly respond by October 1, 2026</p>
+
+    <form id="rsvp-form">
+      <div class="form-row">
+        <label>First Name *</label>
+        <input type="text" name="first_name" required placeholder="Your first name">
+      </div>
+      <div class="form-row">
+        <label>Last Name *</label>
+        <input type="text" name="last_name" required placeholder="Your last name">
+      </div>
+      <div class="form-row">
+        <label>Will you be attending? *</label>
+        <div class="radio-group">
+          <label><input type="radio" name="attending" value="yes" required> Joyfully Accepts</label>
+          <label><input type="radio" name="attending" value="no"> Regretfully Declines</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Number of Guests (including yourself)</label>
+        <select name="guests" id="guest-select">
+          <option value="1">1 (just me)</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5+</option>
+        </select>
+      </div>
+
+      <!-- Dynamic guest fields container -->
+      <div id="guest-fields-container"></div>
+
+      <div class="form-row">
+        <label>Phone Number</label>
+        <input type="tel" name="phone" placeholder="(555) 123-4567">
+      </div>
+      <div class="form-row">
+        <label>Additional Notes</label>
+        <textarea name="notes" placeholder="Dietary needs, song requests, a wish for the couple…"></textarea>
+      </div>
+      <button type="submit" class="btn-submit">
+        <svg width="18" height="14" viewBox="0 0 18 14" fill="none"><rect x="1" y="1" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M1,1 L9,8 L17,1" stroke="currentColor" stroke-width="1.2"/></svg>
+        Send RSVP
+      </button>
+    </form>
+  </div>
+
+  <div class="footer">Maria & Zuhayr · 11.08.2026</div>
+</div>
+
+<!-- ═══ LETTER ANIMATION ELEMENTS ═══ -->
+<div class="fly-overlay" id="fly-overlay"></div>
+<div class="letter-wrapper" id="letter-wrapper" style="display:none">
+  <div class="letter-paper" id="letter-paper">
+    <div><em style="font-size:.8em;color:var(--brown)">RSVP from</em><br><span id="letter-name" style="font-size:1.3em;font-weight:500"></span><br><em style="font-size:.8em;color:var(--teal);margin-top:4px;display:inline-block">Joyfully Accepts!</em></div>
+  </div>
+  <div class="envelope-back"></div>
+  <svg class="envelope-flap" viewBox="0 0 320 80" width="320" height="80"><polygon points="0,0 160,70 320,0 320,2 160,72 0,2"/></svg>
+  <div class="envelope-seal"></div>
+</div>
+
+<!-- ═══ SUCCESS SCREEN ═══ -->
+<div class="success-screen" id="success-screen">
+  <svg class="success-cat" width="80" height="60" viewBox="0 0 80 60">
+    <ellipse cx="40" cy="42" rx="18" ry="16" fill="#1a1a1a"/>
+    <circle cx="40" cy="22" r="13" fill="#1a1a1a"/>
+    <polygon points="28,16 32,2 36,14" fill="#1a1a1a"/>
+    <polygon points="44,14 48,2 52,16" fill="#1a1a1a"/>
+    <ellipse cx="35" cy="22" rx="2.5" ry="3" fill="#f0e060"/>
+    <ellipse cx="45" cy="22" rx="2.5" ry="3" fill="#f0e060"/>
+    <ellipse cx="35" cy="22.5" rx="1.2" ry="2" fill="#1a1a1a"/>
+    <ellipse cx="45" cy="22.5" rx="1.2" ry="2" fill="#1a1a1a"/>
+    <path d="M55,48 Q68,38 64,26" stroke="#1a1a1a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <!-- paws -->
+    <ellipse cx="32" cy="55" rx="5" ry="3" fill="#1a1a1a"/>
+    <ellipse cx="48" cy="55" rx="5" ry="3" fill="#1a1a1a"/>
+  </svg>
+  <h3>Delivery Complete!</h3>
+  <p>Your RSVP has been delivered safely.<br>We can't wait to celebrate with you!</p>
+  <button class="back-btn" onclick="location.reload()">Back to invitation</button>
+</div>
+
+<script>
+/* ═══ DYNAMIC GUEST FIELDS ═══ */
+const guestSelect = document.getElementById('guest-select');
+const guestContainer = document.getElementById('guest-fields-container');
+
+guestSelect.addEventListener('change', renderGuestFields);
+
+function renderGuestFields() {
+  const count = parseInt(guestSelect.value);
+  if (count <= 1) {
+    guestContainer.innerHTML = '';
+    return;
+  }
+  const extra = count >= 5 ? 4 : count - 1; // cap at 4 extra fields for "5+"
+  let html = `<div class="guest-fields"><p class="guest-fields-title">Guest Information</p>`;
+  for (let i = 1; i <= extra; i++) {
+    html += `
+      <div class="guest-entry">
+        <span class="guest-entry-label">Guest ${i}</span>
+        <input type="text" name="guest_${i}_first" placeholder="First name" required>
+        <input type="text" name="guest_${i}_last" placeholder="Last name" required>
+      </div>`;
+  }
+  html += `</div>`;
+  guestContainer.innerHTML = html;
+}
+
+/* ═══ LETTER FOLD & FLY ANIMATION ═══ */
+const letterWrapper = document.getElementById('letter-wrapper');
+const letterPaper = document.getElementById('letter-paper');
+const letterName = document.getElementById('letter-name');
+const flyOverlay = document.getElementById('fly-overlay');
+const successScreen = document.getElementById('success-screen');
+const mainContent = document.getElementById('main-content');
+
+async function playLetterAnimation(name, attending) {
+  // Set letter content
+  letterName.textContent = name;
+  letterPaper.querySelector('em:last-child').textContent =
+    attending === 'yes' ? 'Joyfully Accepts!' : 'Regretfully Declines';
+
+  // Show elements
+  flyOverlay.classList.add('active');
+  letterWrapper.style.display = 'block';
+
+  // Phase 1: Paper appears & shrinks
+  await delay(300);
+  letterWrapper.classList.add('phase-shrink');
+  await delay(700);
+
+  // Phase 2: Envelope slides up behind
+  letterWrapper.classList.add('phase-envelope');
+  await delay(500);
+
+  // Phase 3: Seal stamps
+  letterWrapper.classList.add('phase-seal');
+  await delay(500);
+
+  // Phase 4: Fly away!
+  letterWrapper.classList.add('phase-fly');
+  await delay(1500);
+
+  // Clean up & show success
+  letterWrapper.style.display = 'none';
+  letterWrapper.className = 'letter-wrapper';
+  flyOverlay.classList.remove('active');
+  successScreen.classList.add('show');
+}
+
+function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+/* ═══ FORM SUBMISSION ═══ */
+/*
+  SETUP — Google Sheets backend (free):
+  1. Create a Google Sheet
+  2. Extensions → Apps Script → paste:
+
+     function doPost(e) {
+       var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+       var data = JSON.parse(e.postData.contents);
+       sheet.appendRow([
+         new Date(),
+         data.first_name,
+         data.last_name,
+         data.attending,
+         data.guests,
+         data.guest_names || '',
+         data.phone,
+         data.notes
+       ]);
+       return ContentService
+         .createTextOutput(JSON.stringify({status:'ok'}))
+         .setMimeType(ContentService.MimeType.JSON);
+     }
+
+  3. Deploy → New deployment → Web app (Execute as Me, Access Anyone)
+  4. Paste URL below
+*/
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzib1NpomHY0cn59dWl50JH51Z3NOngghC70GiAMIPIpp5DcBq_xufIOLWhIhPy6fEBhg/exec';
+
+document.getElementById('rsvp-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('.btn-submit');
+  const fd = new FormData(this);
+  const data = Object.fromEntries(fd.entries());
+  if (!data.first_name || !data.attending) return;
+
+  // Collect guest names into a readable string
+  const guestNames = [];
+  const count = parseInt(data.guests) || 1;
+  const extra = count >= 5 ? 4 : count - 1;
+  for (let i = 1; i <= extra; i++) {
+    const f = data[`guest_${i}_first`] || '';
+    const l = data[`guest_${i}_last`] || '';
+    if (f || l) guestNames.push(`${f} ${l}`.trim());
+  }
+  data.guest_names = guestNames.join(', ');
+
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  try {
+    if (SCRIPT_URL !== 'YOUR_SCRIPT_URL') {
+      await fetch(SCRIPT_URL, {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+    } else {
+      await delay(600);
+    }
+
+    // Scroll to top then play animation
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    await delay(400);
+    playLetterAnimation(data.first_name + ' ' + data.last_name, data.attending);
+
+  } catch {
+    btn.disabled = false;
+    btn.textContent = 'Send RSVP';
+    alert('Something went wrong — please try again.');
+  }
+});
+</script>
+</body>
+</html>
