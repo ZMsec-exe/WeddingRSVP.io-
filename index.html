@@ -82,37 +82,87 @@ body{
 .form-row input:focus,.form-row textarea:focus,.form-row select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(28,110,92,.1)}
 .form-row textarea{resize:vertical;min-height:80px}
 
+/* ── Name lookup ── */
+.lookup-row{display:flex;gap:10px;margin-bottom:8px}
+.lookup-row input{flex:1}
+.btn-lookup{
+  padding:12px 20px;background:var(--teal);color:var(--cream);border:none;
+  border-radius:12px;font-family:'DM Sans',sans-serif;font-size:.85rem;
+  font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap;
+  box-shadow:0 2px 10px rgba(28,110,92,.15);
+}
+.btn-lookup:hover{background:var(--teal-light);transform:translateY(-1px)}
+
+/* Error / success messages */
+.lookup-msg{
+  padding:10px 14px;border-radius:10px;font-size:.85rem;font-weight:400;
+  margin-bottom:16px;display:none;animation:fadeUp .3s ease-out;
+}
+.lookup-msg.error{
+  display:block;background:rgba(196,45,45,.08);border:1.5px solid rgba(196,45,45,.25);
+  color:var(--kiki-red-deep);
+}
+.lookup-msg.success{
+  display:block;background:rgba(28,110,92,.06);border:1.5px solid rgba(28,110,92,.2);
+  color:var(--teal);
+}
+.lookup-msg svg{vertical-align:middle;margin-right:6px}
+
+/* ── Group member list ── */
+.group-panel{
+  display:none;animation:fadeUp .4s ease-out;
+}
+.group-panel.show{display:block}
+.group-title{
+  font-size:.78rem;font-weight:500;color:var(--teal);
+  text-transform:uppercase;letter-spacing:.4px;margin-bottom:10px;
+}
+.member-list{margin-bottom:18px}
+.member-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 14px;margin-bottom:6px;
+  background:var(--cream);border:1.5px solid var(--sage);
+  border-radius:12px;transition:all .25s;
+}
+.member-item.added{
+  border-color:var(--teal);background:rgba(28,110,92,.05);
+}
+.member-item.is-you{
+  border-color:var(--gold);background:rgba(184,160,51,.06);
+}
+.member-name{
+  font-size:.92rem;font-weight:400;color:var(--navy);
+  display:flex;align-items:center;gap:8px;
+}
+.member-name .you-badge{
+  font-size:.65rem;font-weight:600;color:var(--gold);
+  background:rgba(184,160,51,.12);padding:2px 8px;border-radius:8px;
+  text-transform:uppercase;letter-spacing:.5px;
+}
+.member-name .attending-badge{
+  font-size:.65rem;font-weight:600;color:var(--teal);
+  background:rgba(28,110,92,.1);padding:2px 8px;border-radius:8px;
+}
+.btn-add,.btn-remove{
+  padding:6px 14px;border:none;border-radius:10px;
+  font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:500;
+  cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:4px;
+}
+.btn-add{
+  background:var(--sage-light);color:var(--teal);border:1.5px solid var(--sage);
+}
+.btn-add:hover{background:var(--teal);color:var(--cream);border-color:var(--teal)}
+.btn-remove{
+  background:rgba(196,45,45,.08);color:var(--kiki-red);border:1.5px solid rgba(196,45,45,.2);
+}
+.btn-remove:hover{background:var(--kiki-red);color:var(--cream)}
+
+/* Attending/declining toggle for the main person */
+.attendance-toggle{margin-bottom:16px}
 .radio-group{display:flex;gap:10px;flex-wrap:wrap}
 .radio-group label{display:flex;align-items:center;gap:6px;cursor:pointer;font-weight:400;font-size:.92rem;text-transform:none;letter-spacing:0;padding:10px 20px;border:1.5px solid var(--sage);border-radius:12px;transition:all .2s;color:var(--navy)}
 .radio-group label:has(input:checked){border-color:var(--kiki-red);background:rgba(196,45,45,.06);color:var(--kiki-red-deep)}
 .radio-group input{display:none}
-
-/* Guest name fields */
-.guest-fields{
-  margin-top:8px;padding:16px;
-  background:var(--sage-light);border-radius:14px;
-  animation:fadeUp .4s ease-out;
-}
-.guest-fields-title{
-  font-size:.78rem;font-weight:500;color:var(--teal);
-  text-transform:uppercase;letter-spacing:.4px;margin-bottom:12px;
-}
-.guest-entry{
-  display:grid;grid-template-columns:1fr 1fr;gap:8px;
-  margin-bottom:10px;position:relative;
-}
-.guest-entry:last-child{margin-bottom:0}
-.guest-entry-label{
-  grid-column:1/-1;font-size:.75rem;font-weight:500;
-  color:var(--brown);margin-bottom:-2px;
-}
-.guest-entry input{
-  padding:10px 12px;border:1.5px solid var(--sage);border-radius:10px;
-  font-family:'DM Sans',sans-serif;font-size:.88rem;
-  background:var(--warm-white);color:var(--navy);
-  transition:border .2s,box-shadow .2s;
-}
-.guest-entry input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(28,110,92,.1)}
 
 .btn-submit{
   display:inline-flex;align-items:center;gap:8px;padding:14px 38px;
@@ -245,6 +295,148 @@ body{
 .success-screen .back-btn:hover{background:var(--teal);color:var(--cream)}
 
 .cat-divider{text-align:center;margin:8px 0 16px;opacity:.45}
+
+/* ═══ REGISTRY CARD ═══ */
+.registry-card{
+  background:var(--warm-white);border-radius:20px;padding:36px 28px;margin-bottom:22px;
+  box-shadow:0 2px 24px var(--shadow),0 0 0 1px rgba(28,110,92,.04);
+  animation:fadeUp .8s ease-out both;animation-delay:.5s;
+  border-top:3px solid var(--gold);
+  position:relative;overflow:hidden;
+  text-align:center;
+}
+.registry-card::after{
+  content:'';position:absolute;bottom:-1px;left:-1px;width:90px;height:90px;
+  background:linear-gradient(315deg,transparent 50%,var(--sage-light) 50%);
+  border-radius:0 0 0 20px;opacity:.3;
+}
+.registry-card .card-header{display:flex;align-items:center;gap:12px;margin-bottom:6px;justify-content:center}
+.registry-card .card-header .card-icon{width:36px;height:36px;flex-shrink:0}
+.registry-card .card-header h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:1.4rem;color:var(--navy)}
+.registry-card p{line-height:1.75;font-weight:300;font-size:.92rem;margin-bottom:0;color:var(--navy-light)}
+
+/* Gift link box */
+.registry-link{
+  display:inline-flex;align-items:center;gap:14px;
+  padding:18px 36px;
+  background:linear-gradient(135deg,var(--cream) 0%,var(--sage-light) 100%);
+  border:2px solid var(--sage);
+  border-radius:16px;
+  text-decoration:none;color:var(--navy);
+  font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:500;
+  transition:all .35s ease;
+  position:relative;z-index:1;
+  box-shadow:0 3px 12px rgba(42,53,85,.06);
+}
+.registry-link:hover{
+  border-color:var(--gold);
+  background:linear-gradient(135deg,#faf5e8 0%,#f0ead4 100%);
+  transform:translateY(-3px);
+  box-shadow:0 8px 28px rgba(184,160,51,.15);
+}
+.registry-link:active{transform:translateY(0)}
+
+/* Animated gift scene */
+.gift-scene{
+  position:relative;height:110px;margin:10px auto 20px;
+  width:220px;
+}
+.gift-box{
+  position:absolute;left:50%;bottom:0;
+  transform:translateX(-50%);
+  animation:gift-bob 3s ease-in-out infinite;
+}
+@keyframes gift-bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-6px)}}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;opacity:0;
+  animation:sparkle-pop 2.5s ease-in-out infinite;
+}
+@keyframes sparkle-pop{
+  0%,100%{opacity:0;transform:scale(.5)}
+  30%{opacity:1;transform:scale(1.1)}
+  60%{opacity:.7;transform:scale(1)}
+  90%{opacity:0;transform:scale(.6) translateY(-8px)}
+}
+
+/* Cat peeking behind gift */
+.gift-cat{
+  position:absolute;bottom:0;left:50%;
+  transform:translateX(30px);
+  animation:cat-peek 4s ease-in-out infinite;
+}
+@keyframes cat-peek{
+  0%,100%{transform:translateX(30px) translateY(10px)}
+  40%,60%{transform:translateX(30px) translateY(0px)}
+}
+
+/* ═══ COLOR PALETTE CARD ═══ */
+.palette-card{
+  background:var(--warm-white);border-radius:20px;padding:36px 28px;margin-bottom:22px;
+  box-shadow:0 2px 24px var(--shadow),0 0 0 1px rgba(28,110,92,.04);
+  animation:fadeUp .8s ease-out both;animation-delay:.6s;
+  text-align:center;position:relative;overflow:hidden;
+}
+.palette-card .card-header{display:flex;align-items:center;gap:12px;margin-bottom:6px;justify-content:center}
+.palette-card .card-header .card-icon{width:36px;height:36px;flex-shrink:0}
+.palette-card .card-header h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:1.4rem;color:var(--navy)}
+.palette-card p{line-height:1.75;font-weight:300;font-size:.92rem;margin-bottom:16px;color:var(--navy-light)}
+
+.palette-swatches{
+  display:flex;justify-content:center;gap:16px;margin:20px 0 8px;
+  flex-wrap:wrap;
+}
+.swatch{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  animation:swatch-pop .5s ease-out both;
+}
+.swatch:nth-child(1){animation-delay:.7s}
+.swatch:nth-child(2){animation-delay:.85s}
+.swatch:nth-child(3){animation-delay:1s}
+.swatch:nth-child(4){animation-delay:1.15s}
+@keyframes swatch-pop{0%{opacity:0;transform:translateY(12px) scale(.8)}100%{opacity:1;transform:translateY(0) scale(1)}}
+
+.swatch-circle{
+  width:72px;height:72px;border-radius:50%;
+  box-shadow:0 3px 12px rgba(0,0,0,.1),inset 0 -2px 6px rgba(0,0,0,.05);
+  transition:transform .3s,box-shadow .3s;
+  position:relative;
+}
+.swatch-circle:hover{
+  transform:scale(1.1);
+  box-shadow:0 6px 20px rgba(0,0,0,.15);
+}
+/* little shine on swatches */
+.swatch-circle::after{
+  content:'';position:absolute;top:10px;left:16px;
+  width:14px;height:8px;border-radius:50%;
+  background:rgba(255,255,255,.35);transform:rotate(-30deg);
+}
+.swatch-name{
+  font-family:'Cormorant Garamond',serif;font-size:.88rem;
+  font-weight:500;color:var(--navy);
+}
+.swatch-hex{
+  font-size:.7rem;font-weight:400;color:var(--brown);
+  letter-spacing:.5px;margin-top:-4px;
+}
+
+/* Hanging clothesline decoration */
+.clothesline{
+  position:relative;width:100%;height:60px;margin:8px 0 16px;
+}
+.clothesline-wire{
+  position:absolute;top:8px;left:10%;right:10%;height:0;
+  border-top:1.5px dashed var(--sage);
+}
+.hanging-item{
+  position:absolute;top:8px;
+  animation:swing 3s ease-in-out infinite alternate;
+  transform-origin:top center;
+}
+@keyframes swing{0%{transform:rotate(-3deg)}100%{transform:rotate(3deg)}}
+
 .footer{text-align:center;padding:30px 0 20px;font-weight:300;font-size:.76rem;color:var(--blush);letter-spacing:1.5px}
 
 @media(max-width:500px){
@@ -257,6 +449,10 @@ body{
   .letter-wrapper{width:260px}
   .letter-paper{height:180px;font-size:.88rem}
   .guest-entry{grid-template-columns:1fr}
+  .registry-link{padding:14px 24px;font-size:1rem}
+  .gift-scene{width:180px;height:100px}
+  .swatch-circle{width:58px;height:58px}
+  .palette-swatches{gap:12px}
 }
 </style>
 </head>
@@ -346,7 +542,7 @@ body{
   </svg>
 
   <div class="hero-text">
-    <p class="hero-tag">Special Delivery — You're Invited</p>
+    <p class="hero-tag"> You're Invited ! </p>
     <h1 class="hero-names">Maria <span class="amp">&</span> Zuhayr</h1>
     <p class="hero-date-line">November 8, 2026 · Four in the Afternoon</p>
   </div>
@@ -376,7 +572,7 @@ for(let i=0;i<4;i++){
     <div class="details-list">
       <div class="detail-row"><span class="d-label">Date</span><span class="d-value">Sunday, November 8, 2026</span></div>
       <div class="detail-row"><span class="d-label">Time</span><span class="d-value">4:00 in the Afternoon</span></div>
-      <div class="detail-row"><span class="d-label">Venue</span><span class="d-value">1380 S. Price Road, Chandler, AZ 85286</span></div>
+      <div class="detail-row"><span class="d-label">Venue</span><span class="d-value">Bella Rose<br>1380 S. Price Road, Chandler, AZ 85286</span></div>
       <div class="detail-row"><span class="d-label">After</span><span class="d-value">Reception to follow</span></div>
     </div>
     <div class="bakery-deco">
@@ -392,7 +588,7 @@ for(let i=0;i<4;i++){
       <svg class="card-icon" viewBox="0 0 36 36" fill="none"><rect x="4" y="8" width="28" height="20" rx="3" stroke="var(--kiki-red)" stroke-width="1.5" opacity=".5"/><path d="M4,8 L18,20 L32,8" stroke="var(--kiki-red)" stroke-width="1.5" opacity=".5"/></svg>
       <h2>A Special Delivery</h2>
     </div>
-    <p>Some deliveries change everything. Ours brought two hearts together across the skies — and now we're ready to begin the greatest adventure of all.</p>
+    <p>Some deliveries change everything. Ours brought two hearts together across the skies and now we're ready to begin the greatest adventure of all.</p>
     <p>Consider this your very own special delivery: an invitation to celebrate with us as we start our new life together.</p>
     <div class="cat-divider">
       <svg width="50" height="30" viewBox="0 0 50 30"><ellipse cx="25" cy="22" rx="10" ry="8" fill="var(--navy)"/><circle cx="25" cy="12" r="7" fill="var(--navy)"/><polygon points="18,9 21,2 23,8" fill="var(--navy)"/><polygon points="27,8 29,2 32,9" fill="var(--navy)"/><ellipse cx="22" cy="12" rx="1.5" ry="2" fill="#f0e060"/><ellipse cx="28" cy="12" rx="1.5" ry="2" fill="#f0e060"/><path d="M34,24 Q40,18 38,12" stroke="var(--navy)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
@@ -405,51 +601,215 @@ for(let i=0;i<4;i++){
       <svg class="card-icon" viewBox="0 0 36 36" fill="none"><path d="M6,28 L6,8 Q6,5 9,5 L27,5 Q30,5 30,8 L30,28" stroke="var(--teal)" stroke-width="1.5" opacity=".5"/><path d="M6,28 L18,20 L30,28" stroke="var(--teal)" stroke-width="1.5" fill="var(--sage-light)" opacity=".3"/><path d="M14,14 L22,14 M14,18 L20,18" stroke="var(--teal)" stroke-width="1" opacity=".4" stroke-linecap="round"/></svg>
       <h2>RSVP</h2>
     </div>
-    <p style="margin-bottom:18px;font-size:.85rem;color:var(--brown)">Kindly respond by October 1, 2026</p>
+    <p style="margin-bottom:18px;font-size:.85rem;color:var(--brown)">Enter your name exactly as it appears on your invitation to find your party.</p>
 
-    <form id="rsvp-form">
-      <div class="form-row">
-        <label>First Name *</label>
-        <input type="text" name="first_name" required placeholder="Your first name">
-      </div>
-      <div class="form-row">
-        <label>Last Name *</label>
-        <input type="text" name="last_name" required placeholder="Your last name">
-      </div>
-      <div class="form-row">
-        <label>Will you be attending? *</label>
-        <div class="radio-group">
-          <label><input type="radio" name="attending" value="yes" required> Joyfully Accepts</label>
-          <label><input type="radio" name="attending" value="no"> Regretfully Declines</label>
+    <div id="rsvp-form">
+      <!-- Step 1: Name lookup -->
+      <div id="lookup-step">
+        <div class="form-row">
+          <label>Your Full Name *</label>
+          <div class="lookup-row">
+            <input type="text" id="name-input" placeholder="e.g. Maria Gonzales" autocomplete="off">
+            <button type="button" class="btn-lookup" id="btn-find">Find Me</button>
+          </div>
         </div>
-      </div>
-      <div class="form-row">
-        <label>Number of Guests (including yourself)</label>
-        <select name="guests" id="guest-select">
-          <option value="1">1 (just me)</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5+</option>
-        </select>
+        <div class="lookup-msg" id="lookup-msg"></div>
       </div>
 
-      <!-- Dynamic guest fields container -->
-      <div id="guest-fields-container"></div>
+      <!-- Step 2: Group & attendance (hidden until found) -->
+      <div class="group-panel" id="group-panel">
+        <div class="attendance-toggle form-row">
+          <label>Will you be attending? *</label>
+          <div class="radio-group">
+            <label><input type="radio" name="attending" value="yes"> Joyfully Accepts</label>
+            <label><input type="radio" name="attending" value="no"> Regretfully Declines</label>
+          </div>
+        </div>
 
-      <div class="form-row">
-        <label>Phone Number</label>
-        <input type="tel" name="phone" placeholder="(555) 123-4567">
+        <p class="group-title">Your Party</p>
+        <p style="font-size:.82rem;color:var(--brown);margin-bottom:12px;font-weight:300">Add the members of your party who will be attending with you.</p>
+        <div class="member-list" id="member-list"></div>
+
+        <div class="form-row">
+          <label>Phone Number</label>
+          <input type="tel" id="rsvp-phone" placeholder="(555) 123-4567">
+        </div>
+        <div class="form-row">
+          <label>Additional Notes</label>
+          <textarea id="rsvp-notes" placeholder=""></textarea>
+        </div>
+        <button type="button" class="btn-submit" id="btn-submit-rsvp">
+          <svg width="18" height="14" viewBox="0 0 18 14" fill="none"><rect x="1" y="1" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M1,1 L9,8 L17,1" stroke="currentColor" stroke-width="1.2"/></svg>
+          Send RSVP
+        </button>
       </div>
-      <div class="form-row">
-        <label>Additional Notes</label>
-        <textarea name="notes" placeholder="Dietary needs, song requests, a wish for the couple…"></textarea>
+    </div>
+  </div>
+
+  <!-- Registry -->
+  <div class="registry-card">
+    <div class="card-header">
+      <svg class="card-icon" viewBox="0 0 36 36" fill="none">
+        <rect x="6" y="14" width="24" height="18" rx="3" stroke="var(--gold)" stroke-width="1.5" opacity=".6"/>
+        <rect x="6" y="14" width="24" height="6" rx="2" stroke="var(--gold)" stroke-width="1.5" fill="var(--sage-light)" opacity=".3"/>
+        <line x1="18" y1="14" x2="18" y2="32" stroke="var(--kiki-red)" stroke-width="1.5" opacity=".4"/>
+        <path d="M18,14 Q12,8 14,5 Q16,3 18,6 Q20,3 22,5 Q24,8 18,14Z" fill="var(--kiki-red)" opacity=".5"/>
+      </svg>
+      <h2>Our Registry</h2>
+    </div>
+    <p>Your presence is the greatest gift, but if you'd like to help us build our new home together, we've created a registry.</p>
+
+    <!-- Animated gift scene -->
+    <div class="gift-scene">
+      <!-- Sparkles -->
+      <svg class="sparkle" style="top:10px;left:30px;animation-delay:0s" width="12" height="12" viewBox="0 0 12 12"><path d="M6,0 L7,4.5 L12,6 L7,7.5 L6,12 L5,7.5 L0,6 L5,4.5Z" fill="var(--gold)" opacity=".7"/></svg>
+      <svg class="sparkle" style="top:5px;right:35px;animation-delay:.8s" width="10" height="10" viewBox="0 0 10 10"><path d="M5,0 L6,3.5 L10,5 L6,6.5 L5,10 L4,6.5 L0,5 L4,3.5Z" fill="var(--kiki-red)" opacity=".5"/></svg>
+      <svg class="sparkle" style="top:30px;left:15px;animation-delay:1.6s" width="8" height="8" viewBox="0 0 8 8"><path d="M4,0 L5,3 L8,4 L5,5 L4,8 L3,5 L0,4 L3,3Z" fill="var(--fern)" opacity=".6"/></svg>
+      <svg class="sparkle" style="top:20px;right:18px;animation-delay:1.2s" width="9" height="9" viewBox="0 0 9 9"><path d="M4.5,0 L5.5,3 L9,4.5 L5.5,6 L4.5,9 L3.5,6 L0,4.5 L3.5,3Z" fill="var(--sky-deep)" opacity=".5"/></svg>
+      <svg class="sparkle" style="top:50px;left:40px;animation-delay:2s" width="7" height="7" viewBox="0 0 7 7"><path d="M3.5,0 L4.2,2.5 L7,3.5 L4.2,4.5 L3.5,7 L2.8,4.5 L0,3.5 L2.8,2.5Z" fill="var(--gold)" opacity=".6"/></svg>
+
+      <!-- Gift box SVG -->
+      <svg class="gift-box" width="70" height="80" viewBox="0 0 70 80">
+        <!-- Box body -->
+        <rect x="5" y="30" width="60" height="45" rx="4" fill="var(--sage)" stroke="var(--teal)" stroke-width="1.5"/>
+        <!-- Box lid -->
+        <rect x="2" y="22" width="66" height="12" rx="4" fill="var(--sage-light)" stroke="var(--teal)" stroke-width="1.5"/>
+        <!-- Ribbon vertical -->
+        <rect x="30" y="22" width="10" height="53" fill="var(--kiki-red)" opacity=".7" rx="1"/>
+        <!-- Ribbon horizontal -->
+        <rect x="2" y="24" width="66" height="8" fill="var(--kiki-red)" opacity=".5" rx="1"/>
+        <!-- Bow -->
+        <g transform="translate(35,22)">
+          <path d="M0,0 Q-16,-14 -10,-18 Q-5,-20 0,-8Z" fill="var(--kiki-red)" opacity=".85"/>
+          <path d="M0,0 Q16,-14 10,-18 Q5,-20 0,-8Z" fill="var(--kiki-red)" opacity=".85"/>
+          <circle cx="0" cy="-2" r="4" fill="var(--kiki-red-deep)"/>
+        </g>
+        <!-- Decorative pattern on box -->
+        <circle cx="20" cy="50" r="3" fill="var(--teal)" opacity=".15"/>
+        <circle cx="50" cy="55" r="2.5" fill="var(--teal)" opacity=".15"/>
+        <circle cx="18" cy="62" r="2" fill="var(--teal)" opacity=".1"/>
+        <circle cx="52" cy="44" r="2" fill="var(--teal)" opacity=".1"/>
+      </svg>
+
+      <!-- Cat peeking from behind -->
+      <svg class="gift-cat" width="36" height="45" viewBox="0 0 36 45">
+        <ellipse cx="18" cy="36" rx="12" ry="9" fill="#1a1a1a"/>
+        <circle cx="18" cy="20" r="10" fill="#1a1a1a"/>
+        <!-- ears -->
+        <polygon points="9,14 12,3 15,12" fill="#1a1a1a"/>
+        <polygon points="21,12 24,3 27,14" fill="#1a1a1a"/>
+        <!-- eyes -->
+        <ellipse cx="14" cy="19" rx="2" ry="2.5" fill="#f0e060"/>
+        <ellipse cx="22" cy="19" rx="2" ry="2.5" fill="#f0e060"/>
+        <ellipse cx="14" cy="19.5" rx="1" ry="1.8" fill="#1a1a1a"/>
+        <ellipse cx="22" cy="19.5" rx="1" ry="1.8" fill="#1a1a1a"/>
+        <!-- nose -->
+        <ellipse cx="18" cy="23" rx="1.2" ry=".8" fill="#444"/>
+        <!-- whiskers -->
+        <line x1="6" y1="21" x2="13" y2="22" stroke="#444" stroke-width=".6" opacity=".4"/>
+        <line x1="6" y1="24" x2="13" y2="23.5" stroke="#444" stroke-width=".6" opacity=".4"/>
+        <line x1="23" y1="22" x2="30" y2="21" stroke="#444" stroke-width=".6" opacity=".4"/>
+        <line x1="23" y1="23.5" x2="30" y2="24" stroke="#444" stroke-width=".6" opacity=".4"/>
+        <!-- tail -->
+        <path d="M28,38 Q36,30 33,20" stroke="#1a1a1a" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <!-- paw on gift -->
+        <ellipse cx="8" cy="37" rx="4.5" ry="2.5" fill="#1a1a1a"/>
+      </svg>
+    </div>
+
+    <a href="https://www.amazon.com/wedding/guest-view/N16M52L0LLNE" target="_blank" rel="noopener" class="registry-link">
+      <!-- Gift icon -->
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
+        <rect x="3" y="10" width="18" height="12" rx="2"/>
+        <rect x="2" y="7" width="20" height="5" rx="2"/>
+        <line x1="12" y1="7" x2="12" y2="22"/>
+        <path d="M12,7 Q7,2 5,4 Q3,6 7,7" fill="none"/>
+        <path d="M12,7 Q17,2 19,4 Q21,6 17,7" fill="none"/>
+      </svg>
+      View Our Registry
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="var(--navy)" stroke-width="1.5" opacity=".4">
+        <path d="M6,3 L11,8 L6,13" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- Color Palette / Dress Code -->
+  <div class="palette-card">
+    <div class="card-header">
+      <svg class="card-icon" viewBox="0 0 36 36" fill="none">
+        <circle cx="12" cy="14" r="5" stroke="var(--blush)" stroke-width="1.5" opacity=".6"/>
+        <circle cx="24" cy="14" r="5" stroke="var(--lavender)" stroke-width="1.5" opacity=".6"/>
+        <circle cx="18" cy="22" r="5" stroke="var(--fern)" stroke-width="1.5" opacity=".6"/>
+        <circle cx="12" cy="14" r="3" fill="#FFADAF" opacity=".4"/>
+        <circle cx="24" cy="14" r="3" fill="#979EC2" opacity=".4"/>
+        <circle cx="18" cy="22" r="3" fill="#737F78" opacity=".4"/>
+      </svg>
+      <h2>Not Sure What To Wear?</h2>
+    </div>
+    <p>We'd love for our guests to dress in similar colors to match the magic of the day!</p>
+
+    <!-- Clothesline with little fabric swatches hanging -->
+    <div class="clothesline">
+      <div class="clothesline-wire"></div>
+      <!-- Hanging mini fabric pieces -->
+      <svg class="hanging-item" style="left:14%;animation-delay:0s" width="28" height="42" viewBox="0 0 28 42">
+        <line x1="14" y1="0" x2="14" y2="10" stroke="var(--brown)" stroke-width="1"/>
+        <polygon points="8,9 20,9 14,6" fill="var(--brown)" opacity=".5"/>
+        <rect x="4" y="10" width="20" height="28" rx="2" fill="#737F78"/>
+        <rect x="4" y="10" width="20" height="4" rx="1" fill="#737F78" opacity=".7"/>
+        <path d="M8,18 Q14,22 20,18" stroke="rgba(255,255,255,.15)" stroke-width="1" fill="none"/>
+      </svg>
+      <svg class="hanging-item" style="left:36%;animation-delay:-.8s" width="28" height="42" viewBox="0 0 28 42">
+        <line x1="14" y1="0" x2="14" y2="10" stroke="var(--brown)" stroke-width="1"/>
+        <polygon points="8,9 20,9 14,6" fill="var(--brown)" opacity=".5"/>
+        <rect x="4" y="10" width="20" height="28" rx="2" fill="#FABF98"/>
+        <rect x="4" y="10" width="20" height="4" rx="1" fill="#FABF98" opacity=".7"/>
+        <path d="M8,22 Q14,26 20,22" stroke="rgba(255,255,255,.15)" stroke-width="1" fill="none"/>
+      </svg>
+      <svg class="hanging-item" style="left:58%;animation-delay:-1.6s" width="28" height="42" viewBox="0 0 28 42">
+        <line x1="14" y1="0" x2="14" y2="10" stroke="var(--brown)" stroke-width="1"/>
+        <polygon points="8,9 20,9 14,6" fill="var(--brown)" opacity=".5"/>
+        <rect x="4" y="10" width="20" height="28" rx="2" fill="#FFADAF"/>
+        <rect x="4" y="10" width="20" height="4" rx="1" fill="#FFADAF" opacity=".7"/>
+        <path d="M8,20 Q14,24 20,20" stroke="rgba(255,255,255,.15)" stroke-width="1" fill="none"/>
+      </svg>
+      <svg class="hanging-item" style="left:78%;animation-delay:-2.4s" width="28" height="42" viewBox="0 0 28 42">
+        <line x1="14" y1="0" x2="14" y2="10" stroke="var(--brown)" stroke-width="1"/>
+        <polygon points="8,9 20,9 14,6" fill="var(--brown)" opacity=".5"/>
+        <rect x="4" y="10" width="20" height="28" rx="2" fill="#979EC2"/>
+        <rect x="4" y="10" width="20" height="4" rx="1" fill="#979EC2" opacity=".7"/>
+        <path d="M8,19 Q14,23 20,19" stroke="rgba(255,255,255,.15)" stroke-width="1" fill="none"/>
+      </svg>
+    </div>
+
+    <!-- Color swatches -->
+    <div class="palette-swatches">
+      <div class="swatch">
+        <div class="swatch-circle" style="background:#737F78"></div>
+        <span class="swatch-name">Sage Green</span>
+        <span class="swatch-hex">#737F78</span>
       </div>
-      <button type="submit" class="btn-submit">
-        <svg width="18" height="14" viewBox="0 0 18 14" fill="none"><rect x="1" y="1" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M1,1 L9,8 L17,1" stroke="currentColor" stroke-width="1.2"/></svg>
-        Send RSVP
-      </button>
-    </form>
+      <div class="swatch">
+        <div class="swatch-circle" style="background:#FABF98"></div>
+        <span class="swatch-name">Peach</span>
+        <span class="swatch-hex">#FABF98</span>
+      </div>
+      <div class="swatch">
+        <div class="swatch-circle" style="background:#FFADAF"></div>
+        <span class="swatch-name">Blush Pink</span>
+        <span class="swatch-hex">#FFADAF</span>
+      </div>
+      <div class="swatch">
+        <div class="swatch-circle" style="background:#979EC2"></div>
+        <span class="swatch-name">Lavender</span>
+        <span class="swatch-hex">#979EC2</span>
+      </div>
+    </div>
+
+    <!-- Cat divider -->
+    <div class="cat-divider" style="margin-top:16px">
+      <svg width="50" height="30" viewBox="0 0 50 30"><ellipse cx="25" cy="22" rx="10" ry="8" fill="var(--navy)"/><circle cx="25" cy="12" r="7" fill="var(--navy)"/><polygon points="18,9 21,2 23,8" fill="var(--navy)"/><polygon points="27,8 29,2 32,9" fill="var(--navy)"/><ellipse cx="22" cy="12" rx="1.5" ry="2" fill="#f0e060"/><ellipse cx="28" cy="12" rx="1.5" ry="2" fill="#f0e060"/><path d="M34,24 Q40,18 38,12" stroke="var(--navy)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+    </div>
   </div>
 
   <div class="footer">Maria & Zuhayr · 11.08.2026</div>
@@ -488,30 +848,164 @@ for(let i=0;i<4;i++){
 </div>
 
 <script>
-/* ═══ DYNAMIC GUEST FIELDS ═══ */
-const guestSelect = document.getElementById('guest-select');
-const guestContainer = document.getElementById('guest-fields-container');
+/* ═══ GUEST DATABASE ═══ */
+const GUEST_DB = [
+  {g:"G1", members:["Aqeel Shahid","Amber Shahid","Mehr Shahid","Kaam Shahid"]},
+  {g:"G2", members:["Annett Gonzales","Ruben Gonzales","Rihanna Gonzales","Mateo Gonzales","Maria Gonzales","Pablo"]},
+  {g:"G3", members:["Lulu Heavener","Gene Heavener"]},
+  {g:"G4", members:["Tata Pablo"]},
+  {g:"G5", members:["Trina Heavener-Baird","Ramsey Baird","Jayden Baird","Maddux Baird"]},
+  {g:"G6", members:["Chelsea Whitney","Chase Whitney","Luke Whitney"]},
+  {g:"G7", members:["Cheryl Heavener","Aunt Cheryl +1"]},
+  {g:"G8", members:["Tia Martha","Tia Martha +1"]},
+  {g:"G9", members:["Marylou Hurtado","Daniel Hurtado","Christian Hurtado","Madori Hurtado"]},
+  {g:"G10", members:["Pablo Gonzales","Yurica Gonzales","Pablito Parra","Javi Parra"]},
+  {g:"G11", members:["Consuelo Salas","Enrique Salas"]},
+  {g:"G12", members:["Rosa Gonzalez","Juan Gonzalez"]},
+  {g:"G13", members:["Jacqueline Lerma","Liliana Lerma"]},
+  {g:"G14", members:["Jacqueline Lerma","Liliana Lerma"]},
+  {g:"G15", members:["Javier Ramirez","Cristina Ramirez","Jacob Ramirez","Caleb Ramirez"]},
+  {g:"G16", members:["Danishel Hernandez","Ahmed","Dani Mom"]},
+  {g:"G17", members:["Raquel Caballero","Jolynn Ferland"]},
+  {g:"G18", members:["Elie Knight"]},
+  {g:"G19", members:["Erica Calderon","Gilbert Calderon","Bianca Calderon","Junior Calderon"]},
+  {g:"G20", members:["Marian Lalonde","Noe Flores"]},
+  {g:"G21", members:["Dori","Scott","Danny"]},
+  {g:"G22", members:["Maria Garcia"]},
+  {g:"G23", members:["Paul Gallego","Raul Gallego"]},
+  {g:"G24", members:["Derek Heavener","Kelly Heavener"]},
+  {g:"G25", members:["Emma De La Rosa"]},
+  {g:"G26", members:["Fahad Baig"]},
+  {g:"G27", members:["Mondarius Johnson","Preston Kydd"]},
+  {g:"G28", members:["Anzul Tirmizi","Elizabeth Tirmizi"]},
+  {g:"G29", members:["Tricia Trejo","Tricia Trejo +1"]},
+  {g:"G30", members:["Hunter Gardner"]},
+  {g:"G31", members:["Chase McCleary"]},
+  {g:"G32", members:["Anthony Manalo"]},
+  {g:"G33", members:["Elias Villa","Elias Villa +1"]},
+  {g:"G34", members:["Jimmy Jarvison","Jimmy Jarvison +1"]},
+  {g:"G35", members:["Justin Smith","Maria Smith"]},
+  {g:"G36", members:["Adam Trupp"]},
+  {g:"G37", members:["Hussein Shaban"]},
+  {g:"G38", members:["Ryan Oconnor","Ryan Oconnor +1"]},
+  {g:"G39", members:["Christian Delzatto"]},
+  {g:"G40", members:["Manny Banuelos"]},
+  {g:"G41", members:["Hunter Quinlan"]},
+  {g:"G42", members:["Ryan Sourignavong"]},
+  {g:"G43", members:["Nyles Bilavanh","Yuritzy Marquez"]},
+  {g:"G44", members:["Efren Acosta"]},
+  {g:"G45", members:["Diego","Breanna Otero"]}
+];
 
-guestSelect.addEventListener('change', renderGuestFields);
+/* ═══ LOOKUP LOGIC ═══ */
+const nameInput = document.getElementById('name-input');
+const btnFind = document.getElementById('btn-find');
+const lookupMsg = document.getElementById('lookup-msg');
+const groupPanel = document.getElementById('group-panel');
+const memberList = document.getElementById('member-list');
 
-function renderGuestFields() {
-  const count = parseInt(guestSelect.value);
-  if (count <= 1) {
-    guestContainer.innerHTML = '';
+let foundGroup = null;
+let foundName = '';
+let addedMembers = new Set();
+
+// Normalize for comparison
+function norm(s){ return s.trim().toLowerCase().replace(/\s+/g,' '); }
+
+function findGuest(input){
+  const n = norm(input);
+  if(!n) return null;
+  for(const group of GUEST_DB){
+    for(const member of group.members){
+      if(norm(member) === n) return { group, matchedName: member };
+    }
+  }
+  // Try partial / fuzzy: first name only or last name only
+  for(const group of GUEST_DB){
+    for(const member of group.members){
+      const parts = norm(member).split(' ');
+      const inputParts = n.split(' ');
+      // Match if all input words appear in the member name
+      if(inputParts.length >= 1 && inputParts.every(p => parts.some(mp => mp.startsWith(p) || mp === p))){
+        return { group, matchedName: member };
+      }
+    }
+  }
+  return null;
+}
+
+btnFind.addEventListener('click', doLookup);
+nameInput.addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); doLookup(); }});
+
+function doLookup(){
+  const input = nameInput.value.trim();
+  if(!input){ lookupMsg.className='lookup-msg error'; lookupMsg.innerHTML='<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M7,4 L7,8 M7,10 L7,10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Please enter your name.'; return; }
+
+  const result = findGuest(input);
+  if(!result){
+    lookupMsg.className='lookup-msg error';
+    lookupMsg.innerHTML='<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M7,4 L7,8 M7,10 L7,10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Name not found. Please enter your name exactly as it appears on your invitation.';
+    groupPanel.classList.remove('show');
     return;
   }
-  const extra = count >= 5 ? 4 : count - 1; // cap at 4 extra fields for "5+"
-  let html = `<div class="guest-fields"><p class="guest-fields-title">Guest Information</p>`;
-  for (let i = 1; i <= extra; i++) {
-    html += `
-      <div class="guest-entry">
-        <span class="guest-entry-label">Guest ${i}</span>
-        <input type="text" name="guest_${i}_first" placeholder="First name" required>
-        <input type="text" name="guest_${i}_last" placeholder="Last name" required>
-      </div>`;
+
+  foundGroup = result.group;
+  foundName = result.matchedName;
+  addedMembers = new Set([foundName]); // Auto-add the person who looked up
+
+  lookupMsg.className='lookup-msg success';
+  lookupMsg.innerHTML=`<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M4,7 L6,9.5 L10,4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Welcome, <strong>${foundName}</strong>! We found your invitation.`;
+
+  nameInput.disabled = true;
+  btnFind.textContent = '✓ Found';
+  btnFind.disabled = true;
+  btnFind.style.background = 'var(--fern)';
+
+  renderMembers();
+  groupPanel.classList.add('show');
+  groupPanel.scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+function renderMembers(){
+  let html = '';
+  for(const member of foundGroup.members){
+    const isYou = member === foundName;
+    const isAdded = addedMembers.has(member);
+    const cls = isYou ? 'member-item is-you added' : (isAdded ? 'member-item added' : 'member-item');
+
+    html += `<div class="${cls}" data-name="${member}">
+      <span class="member-name">
+        ${member}
+        ${isYou ? '<span class="you-badge">You</span>' : ''}
+        ${isAdded && !isYou ? '<span class="attending-badge">Attending</span>' : ''}
+      </span>
+      ${isYou ? '' : (isAdded
+        ? `<button type="button" class="btn-remove" onclick="toggleMember('${member.replace(/'/g,"\\'")}',false)">✕ Remove</button>`
+        : `<button type="button" class="btn-add" onclick="toggleMember('${member.replace(/'/g,"\\'")}',true)">+ Add</button>`
+      )}
+    </div>`;
   }
-  html += `</div>`;
-  guestContainer.innerHTML = html;
+  memberList.innerHTML = html;
+}
+
+function toggleMember(name, add){
+  if(add) addedMembers.add(name);
+  else addedMembers.delete(name);
+  renderMembers();
+}
+
+// Reset button (clicking the name field area)
+function resetLookup(){
+  nameInput.disabled = false;
+  nameInput.value = '';
+  btnFind.textContent = 'Find Me';
+  btnFind.disabled = false;
+  btnFind.style.background = '';
+  lookupMsg.className = 'lookup-msg';
+  groupPanel.classList.remove('show');
+  foundGroup = null;
+  foundName = '';
+  addedMembers.clear();
+  nameInput.focus();
 }
 
 /* ═══ LETTER FOLD & FLY ANIMATION ═══ */
@@ -520,36 +1014,25 @@ const letterPaper = document.getElementById('letter-paper');
 const letterName = document.getElementById('letter-name');
 const flyOverlay = document.getElementById('fly-overlay');
 const successScreen = document.getElementById('success-screen');
-const mainContent = document.getElementById('main-content');
 
 async function playLetterAnimation(name, attending) {
-  // Set letter content
   letterName.textContent = name;
   letterPaper.querySelector('em:last-child').textContent =
     attending === 'yes' ? 'Joyfully Accepts!' : 'Regretfully Declines';
 
-  // Show elements
   flyOverlay.classList.add('active');
   letterWrapper.style.display = 'block';
 
-  // Phase 1: Paper appears & shrinks
   await delay(300);
   letterWrapper.classList.add('phase-shrink');
   await delay(700);
-
-  // Phase 2: Envelope slides up behind
   letterWrapper.classList.add('phase-envelope');
   await delay(500);
-
-  // Phase 3: Seal stamps
   letterWrapper.classList.add('phase-seal');
   await delay(500);
-
-  // Phase 4: Fly away!
   letterWrapper.classList.add('phase-fly');
   await delay(1500);
 
-  // Clean up & show success
   letterWrapper.style.display = 'none';
   letterWrapper.className = 'letter-wrapper';
   flyOverlay.classList.remove('active');
@@ -559,70 +1042,38 @@ async function playLetterAnimation(name, attending) {
 function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 /* ═══ FORM SUBMISSION ═══ */
-/*
-  SETUP — Google Sheets backend (free):
-  1. Create a Google Sheet
-  2. Extensions → Apps Script → paste:
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz6Wh6MMKm-u1mxp5QC2i3cICt1UPw_b5yfiIfkNXZNsbqtpyAzYO_SD_tNJf7iB_cELQ/exec';
 
-     function doPost(e) {
-       var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-       var data = JSON.parse(e.postData.contents);
-       sheet.appendRow([
-         new Date(),
-         data.first_name,
-         data.last_name,
-         data.attending,
-         data.guests,
-         data.guest_names || '',
-         data.phone,
-         data.notes
-       ]);
-       return ContentService
-         .createTextOutput(JSON.stringify({status:'ok'}))
-         .setMimeType(ContentService.MimeType.JSON);
-     }
+document.getElementById('btn-submit-rsvp').addEventListener('click', async function() {
+  const btn = this;
+  const attending = document.querySelector('input[name="attending"]:checked');
 
-  3. Deploy → New deployment → Web app (Execute as Me, Access Anyone)
-  4. Paste URL below
-*/
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbweXkJ9ru3G7NYZt2I339RdDEPImjBC0c9l9XN4IBAIofhe1dheqOhK3wHDYy6bC9OgAg/exec';
+  if(!foundName){ alert('Please find your invitation first.'); return; }
+  if(!attending){ alert('Please select whether you are attending.'); return; }
 
-document.getElementById('rsvp-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const btn = this.querySelector('.btn-submit');
-  const fd = new FormData(this);
-  const data = Object.fromEntries(fd.entries());
-  if (!data.first_name || !data.attending) return;
-
-  // Collect guest names into a readable string
-  const guestNames = [];
-  const count = parseInt(data.guests) || 1;
-  const extra = count >= 5 ? 4 : count - 1;
-  for (let i = 1; i <= extra; i++) {
-    const f = data[`guest_${i}_first`] || '';
-    const l = data[`guest_${i}_last`] || '';
-    if (f || l) guestNames.push(`${f} ${l}`.trim());
-  }
-  data.guest_names = guestNames.join(', ');
+  const data = {
+    submitter: foundName,
+    group: foundGroup.g,
+    attending: attending.value,
+    attending_members: [...addedMembers].join(', '),
+    total_attending: addedMembers.size,
+    phone: document.getElementById('rsvp-phone').value,
+    notes: document.getElementById('rsvp-notes').value
+  };
 
   btn.disabled = true;
   btn.textContent = 'Sending…';
 
   try {
-    if (SCRIPT_URL !== 'YOUR_SCRIPT_URL') {
-      await fetch(SCRIPT_URL, {
-        method: 'POST', mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-    } else {
-      await delay(600);
-    }
+    await fetch(SCRIPT_URL, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
 
-    // Scroll to top then play animation
     window.scrollTo({ top: 0, behavior: 'smooth' });
     await delay(400);
-    playLetterAnimation(data.first_name + ' ' + data.last_name, data.attending);
+    playLetterAnimation(foundName, attending.value);
 
   } catch {
     btn.disabled = false;
